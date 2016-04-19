@@ -1,0 +1,27 @@
+<html>
+<head>
+    <title>Events Page</title>
+</head>
+<body>
+
+<h2>Events:</h2>
+<ul id="events">
+{% for event in events %}
+    <li>{{ event }}</li>
+{% end %}
+</ul>
+
+<script>
+    var ws = new WebSocket("ws://127.0.0.1:8888/events");
+    ws.onmessage = function (evt) {
+       var ul = document.getElementById('events');
+       var li = document.createElement("li");
+       var t = document.createTextNode(evt.data);
+       console.log(evt.data);
+       li.appendChild(t);
+       ul.appendChild(li);
+    };
+</script>
+
+</body>
+</html>
